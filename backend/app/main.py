@@ -6,7 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import structlog
 
 from .config import settings
-from .api.v1.health import router as health_router
+from .api.v1 import api_router
 
 # Setup structlog
 structlog.configure(
@@ -43,7 +43,7 @@ def create_app() -> FastAPI:
     )
 
     # Routers
-    app.include_router(health_router, tags=["Health"])
+    app.include_router(api_router, prefix="/api/v1")
 
     return app
 
